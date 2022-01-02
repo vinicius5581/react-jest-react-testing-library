@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 
+
 const App = () => {
 
   const [inputValue, setInputValue] = useState('');
@@ -9,9 +10,14 @@ const App = () => {
   const inputRef = useRef();
 
   useEffect(async () => {
-    const posts = await axios('https://jsonplaceholder.typicode.com/posts');
-    setPosts(posts.data);
+    try {
+      const posts = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      setPosts(posts.data);
+    } catch(err) {
+      console.log(err)
+    } 
   }, [])
+  
 
   const handleInputChange = (e) => { 
     debugger
